@@ -1,0 +1,56 @@
+<link rel="stylesheet" type="text/css" href="/css/GitHub2.css" />
+
+<h1 id="convert-recursive-to-iterative">convert recursive to iterative</h1>
+<p>The key is find the recursive factor(s), then use variable(s) or register(s) instead of. And find the start point of iterative. And how the procedure proceed step by step.</p>
+
+<h2 id="fibonacci">fibonacci</h2>
+<p>The numbers below are so called <strong>fibonacci numbers</strong>:</p>
+
+<pre><code>0 1 1 2 3 5 8 13 21...
+</code></pre>
+
+<p>represented by mathematic formula:</p>
+
+<pre><code>        0                 n = 0
+f(n) =  1                 n = 1
+        f(n-1) + f(n-2)   n &gt;= 2
+</code></pre>
+
+<p>we can express it recursively:</p>
+
+<pre><code>(define (fib-recursive n)
+  (cond ((= n 0) 0)
+        ((= n 1) 1)
+        (else (+ (fib-recursive (- n 1)) (fib-recursive (- n 2))))))
+</code></pre>
+
+<p>we can see, the recursive factors are: <code>f(n-1)</code> and <code>f(n-2)</code>, we make <strong>a</strong> is <strong>f(n-1)</strong>, <strong>b</strong> is <strong>f(n-2)</strong>, when we step forward one time, so <strong>n-1</strong> will be <strong>n</strong>, <strong>f(n-1)</strong> will be <strong>f(n)</strong>, <strong>f(n-2)</strong> will be <strong>f(n-1)</strong>. This means that, with one step forward, these changes will be made:</p>
+
+<pre><code>a = a + b
+b = a
+</code></pre>
+
+<p>and the start point is:</p>
+
+<pre><code>n = 2
+f(1) = 1
+f(0) = 0
+</code></pre>
+
+<p>now, we can construct the iterative code snippet:</p>
+
+<pre><code>(define (fib-iterative n)
+  (define (iter a b cursor)
+    (cond ((= num 0) 0)
+          ((= num 1) 1)
+          (else (if (= n cursor) (+ a b)
+	            (iter (+ a b) a (+ cursor 1))))))
+  (iter 1 0 2)) ;; this is the start point: f(1) f(0) 2
+</code></pre>
+
+<h2 id="sicp-exercise-111">sicp exercise 1.11</h2>
+
+<h1 id="reference">Reference</h1>
+<ul>
+  <li><a href="http://stackoverflow.com/questions/2365993/no-idea-how-to-solve-sicp-exercise-1-11">clew of solve sicp exercise 1.11</a></li>
+</ul>

@@ -1,0 +1,24 @@
+<h1 id="what-are-we-talking-about">what are we talking about?</h1>
+<p>we are going to compute Fibonacci numbers iteratively.</p>
+
+<h1 id="show-me-the-code">show me the code</h1>
+<p>inspired by the code snippet of section <strong>1.2.2 Tree Recursion</strong>:</p>
+
+<pre><code>(define (fib n)
+  (fib-iter 1 0 n))
+(define (fib-iter a b count)
+  (if (= count 0)
+      b
+      (fib-iter (+ a b) a (- count 1))))
+</code></pre>
+
+<p>my code is below:</p>
+
+<pre><code>(define (fibonacci2 num)
+  (define (iter pre_2 pre_1 cursor)
+    (cond ((= num 0) 0)
+          ((= num 1) 1)
+          (else (if (= num cursor) (+ pre_1 pre_2)
+                (iter pre_1 (+ pre_1 pre_2) (+ cursor 1))))))
+  (iter 0 1 2))
+</code></pre>
